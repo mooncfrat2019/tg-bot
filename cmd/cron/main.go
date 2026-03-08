@@ -25,7 +25,7 @@ func main() {
 
 	_, err := c.AddFunc("@every 1m", func() {
 		app.SendPillNotification(bot)
-		fmt.Println("Задача every1s выполнена:", time.Now())
+		fmt.Println("Задача every1m выполнена:", time.Now())
 	})
 
 	if err != nil {

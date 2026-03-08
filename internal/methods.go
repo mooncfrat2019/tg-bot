@@ -150,16 +150,24 @@ func SendPillNotification(bot *telego.Bot) {
 	defer db.Close()
 	var pills []PillsData
 	d.Find(&pills)
+	fmt.Printf("all pills %v", pills)
 	for _, pill := range pills {
-		// Извлечение числе из строки
+		// Извлечение числа из строки
 		var hours, minuts int
 		_, err := fmt.Sscanf(pill.Time, "%2d:%2d", &hours, &minuts)
 		if err != nil {
-			return
+			fmt.Printf("Ошибка парсинга времени '%s' для лекарства '%s': %v\n",
+				pill.Time, pill.Title, err)
+			continue // Пропускаем это лекарство и переходим к следующему
 		}
+
 		if IsCurrentTime(hours, minuts) {
-			send, _ := bot.SendMessage(tu.Message(tu.ID(pill.UserId), "Время принять лекарство: "+pill.Title))
+			send, _ := bot.SendMessage(tu.Message(tu.ID(pill.UserId),
+				"Время принять лекарство: "+pill.Title))
 			fmt.Printf("Sent Message: %v\n", send)
+		} else {
+			fmt.Printf("Лекарство '%s' запланировано на %02d:%02d, сейчас не время\n",
+				pill.Title, hours, minuts)
 		}
 	}
 }
