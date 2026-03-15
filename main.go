@@ -21,7 +21,7 @@ func main() {
 		fmt.Println(err)
 		return
 	}
-	app.Migrate()
+	//app.Migrate()
 	// Call method getMe
 	botUser, _ := bot.GetMe()
 	fmt.Printf("Bot User: %+v\n", botUser)
