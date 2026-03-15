@@ -2,7 +2,7 @@
 # start.sh - Скрипт запуска Go бэкенда (app + cron) через PM2
 
 echo "=================================================="
-echo "🚀 Freelance Backend (Go) - Starting with PM2"
+echo "🚀 Telegram Pills Bot Backend (Go) - Starting with PM2"
 echo "=================================================="
 echo ""
 
